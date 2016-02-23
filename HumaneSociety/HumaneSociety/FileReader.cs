@@ -16,13 +16,13 @@ namespace HumaneSociety
             _fileName = fileName;
         }
 
-        public void ReadFromFile()
+        public string ReadFromFile()
         {
             using (FileStream fs = new FileStream(_fileName, FileMode.Open, FileAccess.Read))
             {
                 using (StreamReader sr = new StreamReader(fs))
                 {
-                    sr.ReadToEnd();
+                    return sr.ReadToEnd();
                 }
             }
         }
