@@ -18,6 +18,20 @@ namespace HumaneSociety
             //string testFr = fr.ReadFromFile();
             //Console.WriteLine(testFr);
 
+            //var cat = new Cat("Logos", "Cat", "Diet", 5, true);
+            //Console.WriteLine(cat);
+
+            //var cat = new Cat(new Animal("Logos", "Cat", "Diet", 5, true));
+            //Console.WriteLine(cat);
+
+            var animals = new Logger();
+
+
+
+            var ui = new UserInput();
+            Animal animal = ui.MakeAnimal();
+            animals.AddAnimal(animal);
+            animals.PrintAnimals();
 
             Console.ReadKey();
         }

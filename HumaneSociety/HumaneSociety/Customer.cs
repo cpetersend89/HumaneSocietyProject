@@ -6,7 +6,17 @@ using System.Threading.Tasks;
 
 namespace HumaneSociety
 {
-    class Customer
+    public class Customer
     {
+        private string _name;
+        private string _phoneNumber;
+        private Animal _animal;
+
+        public Customer(string name, string phoneNumber, Animal animal)
+        {
+            _name = name;
+            _phoneNumber = phoneNumber;
+            _animal = animal;
+        }
     }
 }
