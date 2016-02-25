@@ -24,14 +24,14 @@ namespace HumaneSociety
             //var cat = new Cat(new Animal("Logos", "Cat", "Diet", 5, true));
             //Console.WriteLine(cat);
 
+            var fw = new FileWriter(@"../../Animals.txt");
+            var fr = new FileReader(@"../../Animals.txt");
             var animals = new Logger();
-
-
-
             var ui = new UserInput();
             Animal animal = ui.MakeAnimal();
             animals.AddAnimal(animal);
-            animals.PrintAnimals();
+            fw.WriteToFile(animal.ToString()); 
+
 
             Console.ReadKey();
         }
