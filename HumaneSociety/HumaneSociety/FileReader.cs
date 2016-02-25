@@ -26,5 +26,12 @@ namespace HumaneSociety
                 }
             }
         }
+        
+        public void DeleteLine(string remove)
+        {
+            var oldLines = File.ReadAllLines(_fileName);
+            var newLines = oldLines.Where(line => !line.Contains(remove));
+            File.WriteAllLines(_fileName, newLines);
+        }
     }
 }

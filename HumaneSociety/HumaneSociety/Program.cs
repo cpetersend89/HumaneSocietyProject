@@ -10,27 +10,24 @@ namespace HumaneSociety
     {
         static void Main(string[] args)
         {
-            //var fw = new FileWriter(@"../../test.txt");
-            //fw.WriteToFile("Testing to see if this writes to the file.");
+            Console.WriteLine("Assign an animal?");
+            UserInput user = new UserInput();
+            Animal cat = user.MakeAnimal();
 
+            Console.WriteLine("Assign to an available cage:");
+            FileReader fr = new FileReader(@"../../Cages.txt");
+            string availablecages = fr.ReadFromFile();
+            Console.Write(availablecages);
 
-            //var fr = new FileReader(@"../../test.txt");
-            //string testFr = fr.ReadFromFile();
-            //Console.WriteLine(testFr);
+            Cage cage = new Cage(@"../../Cages.txt");
+            int num = cage.AssignCage();
+            Console.ReadKey();
 
-            //var cat = new Cat("Logos", "Cat", "Diet", 5, true);
-            //Console.WriteLine(cat);
+            fr.DeleteLine(num.ToString());
+            Console.WriteLine("Removed from database.");
 
-            //var cat = new Cat(new Animal("Logos", "Cat", "Diet", 5, true));
-            //Console.WriteLine(cat);
-
-            var fw = new FileWriter(@"../../Animals.txt");
-            var fr = new FileReader(@"../../Animals.txt");
-            var animals = new Logger();
-            var ui = new UserInput();
-            Animal animal = ui.MakeAnimal();
-            animals.AddAnimal(animal);
-            fw.WriteToFile(animal.ToString()); 
+            FileWriter fw = new FileWriter(@"../../Cats.txt");
+            fw.WriteToFile(num.ToString() + cat);
 
 
             Console.ReadKey();

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HumaneSociety
 {
-    public class Dog
+    public class Adoption
     {
     }
 }

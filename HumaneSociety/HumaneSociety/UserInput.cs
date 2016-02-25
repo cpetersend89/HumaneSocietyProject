@@ -12,11 +12,9 @@ namespace HumaneSociety
         public Animal MakeAnimal()
         {
             string name = AnimalName();
-            string type = AnimalType();
             string food = AnimalFood();
-            int cagenumber = CageNumber();
             bool shots = Shots();
-            return new Animal(name, type, food, cagenumber, shots);
+            return new Animal(name, food, shots);
         }
         private static string AnimalName()
         {
@@ -25,12 +23,12 @@ namespace HumaneSociety
             return name;
         }
 
-        private static string AnimalType()
-        {
-            Console.WriteLine("Please input animal type:");
-            string type = Console.ReadLine();
-            return type;
-        }
+        //private static string AnimalType()
+        //{
+        //    Console.WriteLine("Please input animal type:");
+        //    string type = Console.ReadLine();
+        //    return type;
+        //}
 
         private static string AnimalFood()
         {
@@ -38,8 +36,7 @@ namespace HumaneSociety
             string food = Console.ReadLine();
             return food;
         }
-
-        private static int CageNumber()
+        public int CageNumber()
         {
             int cagenumber;
             Console.WriteLine("Please assign a cage number:");
