@@ -10,25 +10,18 @@ namespace HumaneSociety
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Assign an animal?");
-            UserInput user = new UserInput();
-            Animal cat = user.MakeAnimal();
+            var assignAnimal = new UserInput();
+            int userchoice = assignAnimal.AnimalChoice();
 
-            Console.WriteLine("Assign to an available cage:");
-            FileReader fr = new FileReader(@"../../Cages.txt");
-            string availablecages = fr.ReadFromFile();
-            Console.Write(availablecages);
-
-            Cage cage = new Cage(@"../../Cages.txt");
-            int num = cage.AssignCage();
-            Console.ReadKey();
-
-            fr.DeleteLine(num.ToString());
-            Console.WriteLine("Removed from database.");
-
-            FileWriter fw = new FileWriter(@"../../Cats.txt");
-            fw.WriteToFile(num.ToString() + cat);
-
+            if (userchoice == 1)
+            {
+                var dog = new Dog();
+            }
+            else
+            {
+                var cat = new Cat();
+            }    
+            
 
             Console.ReadKey();
         }

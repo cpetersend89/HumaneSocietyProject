@@ -9,7 +9,7 @@ namespace HumaneSociety
 {
     public class UserInput
     {
-        public Animal MakeAnimal()
+        public Animal AnimalInfo()
         {
             string name = AnimalName();
             string food = AnimalFood();
@@ -22,7 +22,6 @@ namespace HumaneSociety
             string name = Console.ReadLine();
             return name;
         }
-
         //private static string AnimalType()
         //{
         //    Console.WriteLine("Please input animal type:");
@@ -36,18 +35,6 @@ namespace HumaneSociety
             string food = Console.ReadLine();
             return food;
         }
-        public int CageNumber()
-        {
-            int cagenumber;
-            Console.WriteLine("Please assign a cage number:");
-            string userinput = Console.ReadLine();
-            while (!int.TryParse(userinput, out cagenumber))
-            {
-                Console.WriteLine("Not a valid number, please choose a valid number:");
-                userinput = Console.ReadLine();
-            }
-            return cagenumber;
-        }
 
         private static bool Shots()
         {
@@ -60,6 +47,30 @@ namespace HumaneSociety
                 if (shots == "N" || shots == "n")
                     return false;
                 Console.WriteLine("Invalid, try again");
+            }
+        }
+
+        public static int VerifyNumber(string errormessage)
+        {
+            int number;
+            string userInput = Console.ReadLine();
+            while (!int.TryParse(userInput, out number))
+            {
+                Console.WriteLine(errormessage);
+                userInput = Console.ReadLine();
+            }
+            return number;
+        }
+
+        public int AnimalChoice()
+        {
+            Console.WriteLine("Would you like to assign a (1) Dog or a (2) Cat?");
+            while (true)
+            {
+                int choice = VerifyNumber("Invalid: Select '1' for Dog or '2' for Cat.");
+                if (choice == 1 || choice == 2)
+                    return choice;
+                Console.WriteLine("Invalid: Select '1' for Dog or '2' for Cat.");
             }
         }
     }
