@@ -8,25 +8,27 @@ namespace HumaneSociety
 {
     class Cat
     {
+        private readonly List<Animal> _cats = new List<Animal>(); 
         public Cat()
         {
+
+        }
+
+        public void AddCat()
+        {
             UserInput user = new UserInput();
-            Animal cat = user.AnimalInfo();
 
-            Console.WriteLine("Assign to an available cage:");
             FileReader readCages = new FileReader(@"../../Cages.txt");
+
             string availablecages = readCages.ReadFromFile();
-            Console.WriteLine(availablecages);
 
-            Cage cage = new Cage();
-            var num = cage.AssignCage();
-            Console.ReadKey();
+            Console.WriteLine("Available cages:\n" + availablecages);
 
-            readCages.DeleteLine(num.ToString());
-            Console.WriteLine("Removed from database.");
+            Animal cat = user.AnimalInfo();
+            _cats.Add(cat);
 
-            FileWriter fw = new FileWriter(@"../../Cats.txt");
-            fw.WriteToFile(num + " " + cat);
+            FileWriter fw = new FileWriter("//HumaneSociety.settings.xml");
+            fw.WriteToXmlFile(_cats);
         }
     }
 }

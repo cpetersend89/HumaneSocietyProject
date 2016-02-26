@@ -12,7 +12,7 @@ namespace HumaneSociety
         {
             var assignAnimal = new UserInput();
             int userchoice = assignAnimal.AnimalChoice();
-
+            Console.Clear();
             if (userchoice == 1)
             {
                 var dog = new Dog();
@@ -20,7 +20,12 @@ namespace HumaneSociety
             else
             {
                 var cat = new Cat();
-            }    
+                cat.AddCat();
+            }
+
+            //Adoption adopt = new Adoption();
+            //string[] dogs = adopt.FindNewDog("Bruno, is, a, Dog,");
+            //Console.WriteLine(dogs[0]);
             
 
             Console.ReadKey();

@@ -9,12 +9,31 @@ namespace HumaneSociety
 {
     public class UserInput
     {
+        readonly FileReader _readCages = new FileReader(@"../../Cages.txt");
         public Animal AnimalInfo()
         {
+            int cageNumber = AssignCage();
             string name = AnimalName();
             string food = AnimalFood();
-            bool shots = Shots();
-            return new Animal(name, food, shots);
+            string shots = Shots();
+            return new Animal(cageNumber, name, food, shots);
+        }  
+
+        public int AssignCage()
+        {
+            Console.WriteLine("Assign animal to an available cage:");
+            string content = _readCages.ReadFromFile();
+            while (true)
+            {
+                int num = VerifyNumber("Not a valid number, please choose a valid number:"); ;
+                if (content.Contains(num.ToString()))
+                {
+                    _readCages.DeleteLine(num.ToString());
+                    Console.WriteLine($"Cage {num} successfully chosen.");
+                    return num;
+                }
+                Console.WriteLine($"Cage {num} not available, try again.");
+            }
         }
         private static string AnimalName()
         {
@@ -36,16 +55,16 @@ namespace HumaneSociety
             return food;
         }
 
-        private static bool Shots()
+        private static string Shots()
         {
             while (true)
             {
                 Console.WriteLine("Did the animal receive it's shots?  'Y' or 'N'");
                 string shots = Console.ReadLine();
                 if (shots == "Y" || shots == "y")
-                    return true;
+                    return "Yes";
                 if (shots == "N" || shots == "n")
-                    return false;
+                    return "No";
                 Console.WriteLine("Invalid, try again");
             }
         }
