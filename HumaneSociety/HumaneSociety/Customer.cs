@@ -19,6 +19,9 @@ namespace HumaneSociety
             _animal = animal;
         }
 
-
+        public override string ToString()
+        {
+            return $"{"Customer: " + _name} {_phoneNumber} {"Animal: " + _animal.Name + " " + _animal.FoodType + " " + _animal.Shots}";
+        }
     }
 }

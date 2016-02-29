@@ -10,14 +10,27 @@ namespace HumaneSociety
     public class UserInput
     {
         readonly FileReader _readCages = new FileReader(@"../../Cages.txt");
+
+        public int ApplicationOptions()
+        {
+            Console.WriteLine("What would you like to do?\n" +
+                              "(1) Input Animal\n" +
+                              "(2) Adopt Animal\n" +
+                              "(3) Queries");
+            int num = Tools.VerifyNumber("Invalid: Please choose a valid option");
+            return num;
+
+        }
         public Animal AnimalInfo()
         {
             int cageNumber = AssignCage();
+            string type = AnimalType();
             string name = AnimalName();
             string food = AnimalFood();
+            string servingSize = ServingSize();
             string shots = Shots();
-            return new Animal(cageNumber, name, food, shots);
-        }  
+            return new Animal(cageNumber, type, name, food, servingSize, shots);
+        }
 
         public int AssignCage()
         {
@@ -25,7 +38,7 @@ namespace HumaneSociety
             string content = _readCages.ReadFromFile();
             while (true)
             {
-                int num = VerifyNumber("Not a valid number, please choose a valid number:"); ;
+                int num = Tools.VerifyNumber("Not a valid number, please choose a valid number:");
                 if (content.Contains(num.ToString()))
                 {
                     _readCages.DeleteLine(num.ToString());
@@ -35,62 +48,105 @@ namespace HumaneSociety
                 Console.WriteLine($"Cage {num} not available, try again.");
             }
         }
-        private static string AnimalName()
+        public static string AnimalName()
         {
             Console.WriteLine("Please enter the animal's name:");
             string name = Console.ReadLine();
-            return name;
+            return name.ToUpper();
         }
-        //private static string AnimalType()
-        //{
-        //    Console.WriteLine("Please input animal type:");
-        //    string type = Console.ReadLine();
-        //    return type;
-        //}
 
-        private static string AnimalFood()
+        public string AnimalType()
         {
-            Console.WriteLine("Please enter animal's food type:");
-            string food = Console.ReadLine();
-            return food;
+            Console.WriteLine("Select animal type: (1) Dog (2) Cat");
+            while (true)
+            {
+                int choice = Tools.VerifyNumber("Invalid: Select '1' for Dog or '2' for Cat.");
+                if (choice == 1)
+                    return "DOG";
+                if (choice == 2)
+                    return "CAT";
+                Console.WriteLine("Invalid: Select '1' for Dog or '2' for Cat.");
+            }
+
+        }
+        private string AnimalFood()
+        {
+            Console.WriteLine("Select food diet: (1) Regular (2) Diet (3) Gluten Free (4) Soft Only");
+            while (true)
+            {
+                int choice = Tools.VerifyNumber("Invalid: (1) Regular (2) Diet (3) Gluten Free (4) Soft Only");
+                if (choice == 1)
+                    return "REGULAR";
+                if (choice == 2)
+                    return "DIET";
+                if (choice == 3)
+                    return "GLUTEN FREE";
+                if (choice == 4)
+                    return "SOFT ONLY";
+                Console.WriteLine("Invalid: (1) Regular (2) Diet (3) Gluten Free (4) Soft Only");
+            }
         }
 
-        private static string Shots()
+        private string ServingSize()
+        {
+            Console.WriteLine("Serving Size: (1) 1/3 cups (2) 1/2 cups (3) 3/4 cups (4) 1 cup (5) 2 cups");
+            while (true)
+            {
+                int choice = Tools.VerifyNumber("Invalid: (1) 1/3 cups (2) 1/2 cups (3) 3/4 cups (4) 1 cup (5) 2 cups");
+                if (choice == 1)
+                    return "1/3 cups";
+                if (choice == 2)
+                    return "1/2 cups";
+                if (choice == 3)
+                    return "3/4 cups";
+                if (choice == 4)
+                    return "1 cup";
+                if (choice == 5)
+                    return "2 cups";
+                Console.WriteLine("Invalid: (1) 1/3 cups (2) 1/2 cups (3) 3/4 cups (4) 1 cup (5) 2 cups");
+            }
+        }
+
+        private string Shots()
         {
             while (true)
             {
                 Console.WriteLine("Did the animal receive it's shots?  'Y' or 'N'");
                 string shots = Console.ReadLine();
                 if (shots == "Y" || shots == "y")
-                    return "Yes";
+                    return "YES";
                 if (shots == "N" || shots == "n")
-                    return "No";
+                    return "NO";
                 Console.WriteLine("Invalid, try again");
             }
         }
 
-        public static int VerifyNumber(string errormessage)
-        {
-            int number;
-            string userInput = Console.ReadLine();
-            while (!int.TryParse(userInput, out number))
-            {
-                Console.WriteLine(errormessage);
-                userInput = Console.ReadLine();
-            }
-            return number;
-        }
+
 
         public int AnimalChoice()
         {
             Console.WriteLine("Would you like to assign a (1) Dog or a (2) Cat?");
             while (true)
             {
-                int choice = VerifyNumber("Invalid: Select '1' for Dog or '2' for Cat.");
+                int choice = Tools.VerifyNumber("Invalid: Select '1' for Dog or '2' for Cat.");
                 if (choice == 1 || choice == 2)
                     return choice;
                 Console.WriteLine("Invalid: Select '1' for Dog or '2' for Cat.");
             }
+        }
+
+        public string CustomersName()
+        {
+            Console.WriteLine("Enter customers name:");
+            string name = Console.ReadLine();
+            return name.ToUpper();
+        }
+
+        public string CustomersPhoneNumber()
+        {
+            Console.WriteLine("Enter customers phone number:");
+            string phone = Console.ReadLine();
+            return phone;
         }
     }
 }

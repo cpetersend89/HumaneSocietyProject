@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfAnimal xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Animal>
+    <CageNumber>1102</CageNumber>
+    <Name>LOGOS</Name>
+    <Type>CAT</Type>
+    <FoodType>DIET</FoodType>
+    <ServingSize>1/2 cups</ServingSize>
+    <Shots>NO</Shots>
+  </Animal>
+  <Animal>
+    <CageNumber>1103</CageNumber>
+    <Name>COSMOS</Name>
+    <Type>CAT</Type>
+    <FoodType>REGULAR</FoodType>
+    <ServingSize>1/2 cups</ServingSize>
+    <Shots>NO</Shots>
+  </Animal>
+  <Animal>
+    <CageNumber>1104</CageNumber>
+    <Name>SAMPSON</Name>
+    <Type>DOG</Type>
+    <FoodType>GLUTEN FREE</FoodType>
+    <ServingSize>3/4 cups</ServingSize>
+    <Shots>YES</Shots>
+  </Animal>
+  <Animal>
+    <CageNumber>1106</CageNumber>
+    <Name>SPOT</Name>
+    <Type>DOG</Type>
+    <FoodType>REGULAR</FoodType>
+    <ServingSize>2 cups</ServingSize>
+    <Shots>NO</Shots>
+  </Animal>
+</ArrayOfAnimal>
