@@ -10,21 +10,34 @@ namespace HumaneSociety
 {
     public class Adoption
     {
-        private List<Animal> _temp = new List<Animal>();
-        private readonly List<Customer> _customerManifest = new List<Customer>();
-
-        readonly FileReader _readAnimals = new FileReader(@"../../Animals.xml");
-        readonly FileWriter _writeAnimals = new FileWriter(@"../../Animals.xml");
-        readonly FileWriter _customer = new FileWriter(@"../../Customers.txt");
+        readonly FileWriter _writeCustomer = new FileWriter(@"../../Customers.txt");
+        readonly FileWriter _writeAnimal = new FileWriter(@"../../Animals.csv");
 
         public void AdoptAnAnimal(string customerName, string phoneNumber, string animalName)
         {
-            _temp = _readAnimals.Deserializer();
-            var animal = _temp.First(item => item.Name == animalName);
-            _customerManifest.Add(new Customer(customerName, phoneNumber, animal));
-            _customer.WriteCustomerToFile(_customerManifest);
-            _temp.Remove(animal);
-            _writeAnimals.Serializer(_temp);
+            List<Animal> temp = Tools.GetTempAnimalList();
+            foreach (var animal1 in temp)
+            {
+                Console.WriteLine(animal1);
+            }
+            while (true)
+            {
+
+                var animal = temp.First(item => item.Name == " " + animalName);
+                if (!temp.Contains(animal))
+                {
+                    Console.WriteLine("Invalid: Animal does not exist in system.");
+                }
+                else
+                {
+                    List<Customer> customerManifest = new List<Customer>();
+                    customerManifest.Add(new Customer(customerName, phoneNumber, animal));
+                    _writeCustomer.WriteCustomerToFile(customerManifest);
+                    temp.Remove(animal);
+                    _writeAnimal.OverrideFile(temp);
+                    Console.WriteLine($"Confirmation: {customerName} {phoneNumber} {animal}");
+                }
+            }
         }
     }
 }

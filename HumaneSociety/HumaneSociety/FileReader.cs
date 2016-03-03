@@ -25,15 +25,25 @@ namespace HumaneSociety
                     return sr.ReadToEnd();
                 }
             }
-        } 
-        public List<Animal> Deserializer()
+        }
+ 
+        public List<Animal> ReadFromCsvFile()
         {
-            XmlSerializer deserializer = new XmlSerializer(typeof(List<Animal>));
-            TextReader reader = new StreamReader(@"../../Animals.xml");
+            using (FileStream fs = new FileStream(_fileName, FileMode.Open, FileAccess.Read))
+            {
+                using (StreamReader sr = new StreamReader(fs))
+                {
+                    List<Animal> animals = new List<Animal>();
+                    while (!sr.EndOfStream)
+                    {
+                        string str = sr.ReadLine();
+                        string[] parseString = str.Split(',');
 
-            List<Animal> obj = (List<Animal>)deserializer.Deserialize(reader);
-            reader.Close();
-            return obj;
+                        animals.Add(new Animal(int.Parse(parseString[0]), parseString[1], parseString[2], parseString[3], parseString[4], parseString[5]));
+                    }
+                    return animals;
+                }
+            }
         }
         public void DeleteLine(string remove)
         {
@@ -41,6 +51,14 @@ namespace HumaneSociety
             var newLines = oldLines.Where(line => !line.Contains(remove));
             File.WriteAllLines(_fileName, newLines);
         }
+        //public List<Animal> Deserializer()
+        //{
+        //    XmlSerializer deserializer = new XmlSerializer(typeof(List<Animal>));
+        //    TextReader reader = new StreamReader(@"../../Animals.csv");
 
+        //    List<Animal> obj = (List<Animal>)deserializer.Deserialize(reader);
+        //    reader.Close();
+        //    return obj;
+        //}
     }
 }

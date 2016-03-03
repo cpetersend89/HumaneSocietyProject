@@ -8,99 +8,104 @@ namespace HumaneSociety
 {
     class Navigation
     {
-        readonly Queries _queries = new Queries();
-        public Navigation()
-        {
 
-        }
-
-        public void MainMenu()
+        public void DisplayMainMenu()
         {
             Console.WriteLine("Main Menu:\n(1) Input Animal\n(2) Adopt Animal\n(3) Queries\n(4) Update Shot Record **COMING SOON**\n(5) Close Application");
             while (true)
-            {
-                
+            { 
                 int num = Tools.VerifyNumber("Invalid: Please choose a valid option");
                 switch (num)
                 {
-                    case 1:
+                    case 1: //Input Animal
+                        Console.Clear();
                         var animal = new Animal();
                         animal.AddAnimal();
                         Tools.ClearConsole();
                         break;
-                    case 2:
-                        _queries.FindAllAnimals();
-                        var animalAdoption = new UserInput();
-                        string name = animalAdoption.CustomersName();
-                        string phone = animalAdoption.CustomersPhoneNumber();
-                        string animalName = UserInput.AnimalName();
+                    case 2: //Adopt Animal
+                        Console.Clear();
+                        Queries.FindAllAnimals();
+                        string animalName = UserInput.GetAnimalName();
+                        string name = UserInput.CustomersName();
+                        string phone = UserInput.CustomersPhoneNumber();
                         var adopt = new Adoption();
                         adopt.AdoptAnAnimal(name, phone, animalName);
                         Tools.ClearConsole();
                         break;
-                    case 3:
-                        QueriesMenu();
+                    case 3: //Queries
+                        Console.Clear();
+                        DisplayQueriesMenu();
                         break;
-                    case 4:
-                        Console.WriteLine("Coming soon: Select an available option");
+                    case 4: //Update Shots
+                        var updateShots = new Shots();
+                        updateShots.UpdateShots("Logos");
                         Tools.ClearConsole();
                         break;
-                    case 5:
+                    case 5: //Close Application
                         Environment.Exit(0);
                         break;
                     default:
                         Console.WriteLine("Invalid: Please choose a valid option");
                         break;
                 }
-                MainMenu();
+                DisplayMainMenu();
             }
         }
 
-        private void QueriesMenu()
+        private void DisplayQueriesMenu()
         {
             while (true)
             {
-                Console.WriteLine("Select option:\n" + "(1) View All Animals\n" + "(2) View All Dogs\n" + "(3) View All Cats\n" + "(4) View Animals Needing Shots\n" + "(5) Find Animal by Name\n" + "(6) Find Animal by Cage Number\n" + "(7) View Customer Adoptions");
+                Console.WriteLine("Select option:\n" + "(1) View All Animals\n" + "(2) View All Dogs\n" + "(3) View All Cats\n" + "(4) View Animals Needing Shots\n" + "(5) Find Animal by Name\n" + "(6) Find Animal by Cage Number\n" + "(7) View Customer Adoptions\n" + "(8) Main Menu");
                 int choice = Tools.VerifyNumber("Invalid: Please choose a valid option");
                 switch (choice)
                 {
-                    case 1:
-                        _queries.FindAllAnimals();
+                    case 1: //View All Animals
+                        Console.Clear();
+                        Queries.FindAllAnimals();
                         Tools.ClearConsole();
                         break;
-                    case 2:
-                        _queries.FindAllDogs();
+                    case 2: // View All Dogs
+                        Console.Clear();
+                        Queries.FindAllDogs();
                         Tools.ClearConsole();
                         break;
-                    case 3:
-                        _queries.FindAllCats();
+                    case 3: //View All Cats
+                        Console.Clear();
+                        Queries.FindAllCats();
                         Tools.ClearConsole();
                         break;
-                    case 4:
-                        _queries.FindAnimalsNeedShots();
+                    case 4: //View Animals Needing Shots
+                        Console.Clear();
+                        Queries.FindAnimalsNeedingShots();
                         Tools.ClearConsole();
                         break;
-                    case 5:
-                        string name = UserInput.AnimalName();
-                        _queries.FindAnimalByName(name);
+                    case 5: //View Animal By Name
+                        Console.Clear();
+                        Queries.FindAnimalByName();
                         Tools.ClearConsole();
                         break;
-                    case 6:
-                        Console.WriteLine("Enter cage number:");
-                        int number = Tools.VerifyNumber("Invalid: Please choose a valid number");
-                        _queries.FindAnimalByCage(number);
+                    case 6: //View Animal By Cage Number
+                        Console.Clear();
+                        Queries.FindAnimalByCage();
                         Tools.ClearConsole();
                         break;
-                    case 7:
-                        _queries.PrintCustomerAdoptions();
+                    case 7: //View Customer Manifest
+                        Console.Clear();
+                        Queries.PrintCustomerAdoptions();
                         Tools.ClearConsole();
+                        break;
+                    case 8: //Back to Main Menu
+                        Console.Clear();
+                        DisplayMainMenu();
                         break;
                     default:
                         Console.Clear();
                         Console.WriteLine("Invalid: Please choose a valid option");
                         continue;
                 }
-                MainMenu();
+                DisplayQueriesMenu();
             }
         }
     }

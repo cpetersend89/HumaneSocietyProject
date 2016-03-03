@@ -8,9 +8,9 @@ namespace HumaneSociety
 {
     public class Customer
     {
-        private string _name;
-        private string _phoneNumber;
-        private Animal _animal;
+        private readonly string _name;
+        private readonly string _phoneNumber;
+        private readonly Animal _animal;
 
         public Customer(string name, string phoneNumber, Animal animal)
         {

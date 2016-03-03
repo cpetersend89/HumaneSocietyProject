@@ -9,53 +9,50 @@ namespace HumaneSociety
 {
     public class UserInput
     {
-        readonly FileReader _readCages = new FileReader(@"../../Cages.txt");
+        private static readonly FileReader ReadCages = new FileReader(@"../../Cages.txt");
 
-        public int ApplicationOptions()
+        public static Animal GetAnimalInfo()
         {
-            Console.WriteLine("What would you like to do?\n" +
-                              "(1) Input Animal\n" +
-                              "(2) Adopt Animal\n" +
-                              "(3) Queries");
-            int num = Tools.VerifyNumber("Invalid: Please choose a valid option");
-            return num;
-
-        }
-        public Animal AnimalInfo()
-        {
-            int cageNumber = AssignCage();
-            string type = AnimalType();
-            string name = AnimalName();
-            string food = AnimalFood();
-            string servingSize = ServingSize();
-            string shots = Shots();
+            int cageNumber = AssignAnimalToCage();
+            string type = GetAnimalType();
+            string name = GetAnimalName();
+            string food = GetAnimalFood();
+            string servingSize = GetServingSize();
+            string shots = GetShots();
             return new Animal(cageNumber, type, name, food, servingSize, shots);
         }
 
-        public int AssignCage()
+        public static int AssignAnimalToCage()
         {
             Console.WriteLine("Assign animal to an available cage:");
-            string content = _readCages.ReadFromFile();
+            string content = ReadCages.ReadFromFile();
             while (true)
             {
                 int num = Tools.VerifyNumber("Not a valid number, please choose a valid number:");
                 if (content.Contains(num.ToString()))
                 {
-                    _readCages.DeleteLine(num.ToString());
+                    ReadCages.DeleteLine(num.ToString());
                     Console.WriteLine($"Cage {num} successfully chosen.");
                     return num;
                 }
                 Console.WriteLine($"Cage {num} not available, try again.");
             }
         }
-        public static string AnimalName()
+
+        public static int GetCageNumber()
+        {
+            Console.WriteLine("Enter cage number:");
+            int num = Tools.VerifyNumber("Invalid: Please choose a valid number");
+            return num;
+        }
+        public static string GetAnimalName()
         {
             Console.WriteLine("Please enter the animal's name:");
             string name = Console.ReadLine();
             return name.ToUpper();
         }
 
-        public string AnimalType()
+        public static string GetAnimalType()
         {
             Console.WriteLine("Select animal type: (1) Dog (2) Cat");
             while (true)
@@ -69,7 +66,7 @@ namespace HumaneSociety
             }
 
         }
-        private string AnimalFood()
+        private static string GetAnimalFood()
         {
             Console.WriteLine("Select food diet: (1) Regular (2) Diet (3) Gluten Free (4) Soft Only");
             while (true)
@@ -87,7 +84,7 @@ namespace HumaneSociety
             }
         }
 
-        private string ServingSize()
+        public static string GetServingSize()
         {
             Console.WriteLine("Serving Size: (1) 1/3 cups (2) 1/2 cups (3) 3/4 cups (4) 1 cup (5) 2 cups");
             while (true)
@@ -107,7 +104,7 @@ namespace HumaneSociety
             }
         }
 
-        private string Shots()
+        public static string GetShots()
         {
             while (true)
             {
@@ -121,28 +118,14 @@ namespace HumaneSociety
             }
         }
 
-
-
-        public int AnimalChoice()
-        {
-            Console.WriteLine("Would you like to assign a (1) Dog or a (2) Cat?");
-            while (true)
-            {
-                int choice = Tools.VerifyNumber("Invalid: Select '1' for Dog or '2' for Cat.");
-                if (choice == 1 || choice == 2)
-                    return choice;
-                Console.WriteLine("Invalid: Select '1' for Dog or '2' for Cat.");
-            }
-        }
-
-        public string CustomersName()
+        public static string CustomersName()
         {
             Console.WriteLine("Enter customers name:");
             string name = Console.ReadLine();
             return name.ToUpper();
         }
 
-        public string CustomersPhoneNumber()
+        public static string CustomersPhoneNumber()
         {
             Console.WriteLine("Enter customers phone number:");
             string phone = Console.ReadLine();

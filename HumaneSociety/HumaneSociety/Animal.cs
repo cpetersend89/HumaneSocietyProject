@@ -16,49 +16,65 @@ namespace HumaneSociety
         public string FoodType { get; set; }
         public string ServingSize { get; set; }
         public string Shots { get; set; }
-        private readonly List<Animal> _animals = new List<Animal>();
-        private List<Animal> _temp = new List<Animal>();
 
         public Animal()
         {
         }
-        public Animal(int cageNumber, string type, string name, string foodType, string servingSize, string shots)
+        
+        public Animal(int cageNumber, string name, string type, string foodType, string servingSize, string shots)
         {
             CageNumber = cageNumber;
-            Type = type;
             Name = name;
+            Type = type;
             FoodType = foodType;
             ServingSize = servingSize;
             Shots = shots;
         }
+
         public void AddAnimal()
         {
-            UserInput user = new UserInput();
-
-            var readCages = new FileReader(@"../../Cages.txt");
+            FileReader readCages = new FileReader(@"../../Cages.txt");
 
             string availablecages = readCages.ReadFromFile();
 
             Console.WriteLine("Available cages:\n" + availablecages);
 
-            Animal animal = user.AnimalInfo();
-            _animals.Add(animal);
+            List<Animal> animals = new List<Animal>();
+            Animal animal = UserInput.GetAnimalInfo();
+            animals.Add(animal);
 
-            FileWriter addAnimal = new FileWriter(@"../../Animals.xml");
-            FileReader deserialize = new FileReader(@"../../Animals.xml");
-            if (File.Exists(@"../../Animals.xml"))
-            {
-                _temp = deserialize.Deserializer();
-                _temp.Add(animal);
-                addAnimal.Serializer(_temp);
-            }
-            else { addAnimal.Serializer(_animals); }
+            FileWriter addAnimal = new FileWriter(@"../../Animals.csv");
+            addAnimal.WriteCsvToFile(animals);
         }
 
         public override string ToString()
         {
-            return $"Cage: {CageNumber} Type: {Type} Name: {Name} Food Type: {FoodType} Daily Serving {ServingSize} Received Shots {Shots}";
+            return $"{CageNumber} {Type} {Name} {FoodType} {ServingSize} {Shots}";
         }
+
+        //public void AddAnimal2()
+        //{
+        //    UserInput user = new UserInput();
+
+        //    var readCages = new FileReader(@"../../Cages.txt");
+
+        //    string availablecages = readCages.ReadFromFile();
+
+        //    Console.WriteLine("Available cages:\n" + availablecages);
+
+        //    Animal animal = user.AnimalInfo();
+        //    _animals.Add(animal);
+
+        //    FileWriter addAnimal = new FileWriter(@"../../Animals.xml");
+        //    FileReader deserialize = new FileReader(@"../../Animals.xml");
+        //    if (File.Exists(@"../../Animals.xml"))
+        //    {
+        //        _temp = deserialize.Deserializer();
+        //        _temp.Add(animal);
+        //        addAnimal.Serializer(_temp);
+        //    }
+        //    else { addAnimal.Serializer(_animals); }
+        //}
 
     }
 }

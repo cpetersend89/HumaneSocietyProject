@@ -23,9 +23,25 @@ namespace HumaneSociety
 
         public static void ClearConsole()
         {
-            Console.WriteLine("Press any key to continue...");
+            Console.WriteLine("\nPress any key to continue...");
             Console.ReadKey();
             Console.Clear();
         }
+
+        public static List<Animal> GetTempAnimalList()
+        {
+            FileReader readAnimals = new FileReader(@"../../Animals.csv");
+            List<Animal> temp = readAnimals.ReadFromCsvFile();
+            return temp;
+        }
+
+        public static void PrintAnimalList(List<Animal> animals)
+        {
+            foreach (Animal animal in animals)
+            {
+                Console.WriteLine(animal);
+            }
+        }
+
     }
 }

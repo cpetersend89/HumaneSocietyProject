@@ -13,7 +13,9 @@ namespace HumaneSociety
         static void Main(string[] args)
         {
             var navigate = new Navigation();
-            navigate.MainMenu();
+            navigate.DisplayMainMenu();
+
+            Console.ReadKey();
         }
     }
 }
